@@ -109,6 +109,3 @@ Este repositorio incluye un **dataset original de vibración** capturado desde u
 - El dataset está disponible en este repositorio bajo una licencia **abierta** para su uso libre con fines investigativos, educativos o de desarrollo.
 
 *ℹ️ Si utilizas este dataset en tus trabajos, publicaciones o desarrollos, se agradece atribución al repositorio.*
-tivos o de desarrollo.
-
-*ℹ️ Si utilizas este dataset en tus trabajos, publicaciones o desarrollos, se agradece atribución al repositorio.*
