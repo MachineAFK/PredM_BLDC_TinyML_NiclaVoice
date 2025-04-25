@@ -34,9 +34,10 @@ Esta guía describe cómo integrar un modelo de aprendizaje automático entrenad
 ## 🔌 Integración del Modelo en el Firmware
 
 1. Extrae el contenido de la librería Arduino exportada.
-2. Copia el archivo `ei_model.synpkg` que esta en `predm_largeimu-syntiant-ndp120-lib-tdk-v13.zip` en este repositorio y reemplazalo en la carpeta`ndp120/` del firmware base y [flashealo](https://docs.arduino.cc/tutorials/nicla-voice/user-manual/) en el NDP con los algoritmos que proporcionan en el manual de arduino.
-3. Reemplaza la carpeta model_metadata de `predm_largeimu-syntiant-ndp120-lib-tdk-v13.zip` en el firmware original y haz el build correspondiente, en este caso con IMU.
-Tambien se incluye un binario generado en edgeimpulse que facilita la subida a la tarjeta
+2. Reemplaza la carpeta model_metadata de `predm_largeimu-syntiant-ndp120-lib-tdk-v13.zip` en el firmware original y haz el build correspondiente, en este caso con IMU.
+Tambien se incluye un binario generado en edgeimpulse que facilita la subida a la tarjeta aunque sin el modulo.
+3. Copia el archivo `ei_model.synpkg` que esta en `predm_largeimu-syntiant-ndp120-lib-tdk-v13.zip` en este repositorio y reemplazalo en la carpeta`ndp120/` del firmware base y [flashealo](https://docs.arduino.cc/tutorials/nicla-voice/user-manual/) en el NDP con los algoritmos que proporcionan en el manual de arduino.
+
 ---
 
 ## 🔎 Estimación de RUL (`RULModule.h`)
@@ -72,7 +73,7 @@ El archivo `RULModule.h` implementa una lógica personalizada que interpreta las
 ## 🧠 Aplicaciones
 
 - Monitoreo inteligente de motores BLDC.
-- Detección temprana de fallas mediante análisis acústico.
+- Detección temprana de fallas mediante análisis de señales.
 - Sistemas embebidos de bajo consumo con capacidades de aprendizaje automático.
 
 ---
