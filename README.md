@@ -35,7 +35,7 @@ Esta guía describe cómo integrar un modelo de aprendizaje automático entrenad
 ## 🔌 Integración del Modelo en el Firmware
 
 1. Extrae el contenido de la librería Arduino exportada.
-2. Copia el archivo `ei_model.synpkg` que esta en `predm_largeimu-syntiant-ndp120-lib-tdk-v13.zip` en este repositorio y reemplazalo en la carpeta`ndp120/` del firmware base y [flashealo en el NDP con los algoritmos que proporcionan en el manual de arduino](https://docs.arduino.cc/tutorials/nicla-voice/user-manual/).
+2. Copia el archivo `ei_model.synpkg` que esta en `predm_largeimu-syntiant-ndp120-lib-tdk-v13.zip` en este repositorio y reemplazalo en la carpeta`ndp120/` del firmware base y [flashealo](https://docs.arduino.cc/tutorials/nicla-voice/user-manual/) en el NDP con los algoritmos que proporcionan en el manual de arduino.
 3. Reemplaza la carpeta model_metadata de `predm_largeimu-syntiant-ndp120-lib-tdk-v13.zip` en el firmware original y haz el build correspondiente, en este caso con IMU.
 4. Abre el proyecto en el Arduino IDE, compílalo y cárgalo en la Nicla Voice.
 
