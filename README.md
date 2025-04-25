@@ -10,7 +10,6 @@ Esta guía describe cómo integrar un modelo de aprendizaje automático entrenad
 - [Firmware original desde Edge Impulse para Nicla Voice](https://github.com/edgeimpulse/firmware-arduino-nicla-voice).
 - codigo `ei_syntiant_ndp120.cpp` del anterior firmware modificado para reemplazar asi como tambien la metadata y las variables del modelo.
 - Módulo personalizado para inferencia y cálculo de RUL (`RULModule.h`).
-- Instrucciones detalladas para integración y uso.
 
 ---
 
