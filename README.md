@@ -1,55 +1,110 @@
-# 🧠 Estimador de RUL basado en clasificación Edge Impulse para NDP120
+# 🧠 Integración de Modelo Edge Impulse con Arduino Nicla Voice para Estimación de RUL
 
-Este repositorio contiene una implementación en C++ que permite calcular la Vida Útil Restante (**RUL**, por sus siglas en inglés) de un motor brushless, utilizando las salidas categóricas de un modelo de clasificación generado en **Edge Impulse** y desplegado sobre el microcontrolador **NDP120**. El objetivo es integrar el cálculo de RUL dentro de un sistema embebido para monitorear el estado de los motores en tiempo real.
+Esta guía describe cómo integrar un modelo de aprendizaje automático entrenado en **Edge Impulse** en la tarjeta **Arduino Nicla Voice**, que incorpora el chip **Syntiant NDP120**, para implementar un sistema de estimación de **Vida Útil Restante (RUL)** en motores brushless DC (BLDC).
 
-## 📌 Descripción del proyecto
+---
 
-Este código forma parte de una anexión técnica del trabajo de grado titulado:
+## 📦 Contenido del Proyecto
 
-> **"Dispositivo de monitoreo en motores brushless basado en TinyML"**
+- Modelo TinyML exportado en formato `.synpkg`.
+- Firmware base modificado desde Edge Impulse para Nicla Voice.
+- Módulo personalizado para inferencia y cálculo de RUL (`RULModule.h`).
+- Instrucciones detalladas para integración y uso.
 
-El modelo de clasificación fue entrenado para identificar distintos estados de salud del motor (desde sano hasta fallas progresivas) y fue exportado mediante la librería de Edge Impulse para ser ejecutado en tiempo real en la tarjeta Arduino Nicla Voice. A partir de estas etiquetas de salida, el módulo calcula una estimación del RUL de forma eficiente y adaptable al hardware.
+---
 
-## ⚙️ Funcionalidad
+## 🧰 Requisitos
 
-- **Historial de predicciones**: Mantiene una cola de las últimas 10 predicciones realizadas por el modelo para analizar la tendencia temporal.
-- **Estado predominante**: Determina la clase más común (moda) dentro del historial.
-- **Estimación de RUL**: Calcula la vida útil restante utilizando la fórmula:  
-  `RUL = 100 - (score * 5)`, donde el score refleja la severidad del fallo.
-- **Filtrado de categorías válidas**: Filtra predicciones no esperadas mediante una tabla definida por el usuario, asegurando solo categorías válidas.
-- **Listo para microcontroladores**: Optimizado para funcionar en sistemas embebidos con recursos limitados, como el NDP120.
+- [Arduino IDE](https://www.arduino.cc/en/software)
+- Tarjeta **Arduino Nicla Voice**
+- Cuenta en [Edge Impulse](https://www.edgeimpulse.com)
+- Modelo entrenado y exportado como `.synpkg`
 
-## 🛠 Requisitos
+---
 
-- Microcontrolador compatible con **NDP120** (por ejemplo: Arduino con integración Syntiant).
-- Proyecto generado en **Edge Impulse** con un modelo de clasificación multiclase entrenado con datos de vibración.
-- Integración con la librería `edge-impulse-sdk` exportada para NDP120.
+## 📤 Exportación del Modelo desde Edge Impulse
 
-## 🔗 Firmware oficial para Arduino Nicla Voice IMU
+1. Entrena tu modelo en Edge Impulse con datos relevantes del motor (por ejemplo, audio).
+2. Dirígete a la pestaña **Deployment** de tu proyecto.
+3. Selecciona **Syntiant NDP120 library (.synpkg)** y descarga el archivo.
+4. También puedes descargar la **Arduino library** generada para usar como base del firmware.
 
-Para configurar y utilizar el Arduino Nicla Voice con Edge Impulse, es necesario descargar e instalar el firmware oficial proporcionado por Edge Impulse. Puedes encontrar las instrucciones detalladas y los enlaces de descarga en la documentación oficial:
+---
 
-👉 [Arduino Nicla Voice - Documentación de Edge Impulse](https://docs.edgeimpulse.com/docs/edge-ai-hardware/mcu-%2B-ai-accelerators/arduino-nicla-voice)
+## 🔌 Integración del Modelo en el Firmware
 
-En esta página encontrarás opciones para descargar el firmware tanto para audio como para IMU, así como guías paso a paso para la instalación y configuración en diferentes sistemas operativos.
+1. Extrae el contenido de la librería Arduino exportada.
+2. Copia el archivo `model.syntiant` a la carpeta `model-parameters/` del firmware base.
+3. Verifica que las clases del modelo coincidan con las utilizadas en `RULModule.h`.
+4. Abre el proyecto en el Arduino IDE, compílalo y cárgalo en la Nicla Voice.
 
-## 🧩 Integración con el Firmware de Edge Impulse
+---
 
-Para integrar este módulo en tu proyecto con Edge Impulse, ubica la sección del firmware donde se recibe la predicción del modelo. En el firmware oficial generado por Edge Impulse, normalmente se encuentra en el archivo `main.cpp` dentro de la función que realiza la inferencia, como por ejemplo:
+## 🔎 Estimación de RUL (`RULModule.h`)
 
-```cpp
-ei_impulse_result_classification result = ...;
-Convierte la salida a tipo String y pásala al módulo de estimación de RUL:
+El archivo `RULModule.h` implementa una lógica personalizada que interpreta las predicciones del modelo para calcular la vida útil restante del motor.
 
-cpp
-Copiar
-Editar
-String predicted_label = String(result.classification[ix].label);
-classifyAndReport(predicted_label);
-Asegúrate de incluir el archivo del módulo en tu sketch o firmware, o pegar el contenido directamente si trabajas desde el Arduino IDE. Además, no olvides inicializar Serial.begin(115200); en el setup().
+### ¿Cómo funciona?
 
-🧪 Recomendación
-Puedes usar la función exampleUsage() incluida en el módulo para simular entradas y validar la lógica de estimación de RUL antes de integrarlo con las predicciones reales del modelo.
+- El modelo predice una clase basada en el audio captado.
+- Se valida que la clase esté definida en el sistema.
+- Se mantiene un historial circular de predicciones recientes.
+- Se calcula la clase más frecuente (moda).
+- A cada clase se le asigna una puntuación predefinida.
+- El RUL se calcula con la fórmula:
+  RUL = 100 - (puntuación * 5)
 
-📁 Archivos incluidos
-estimador_rul.cpp: Implementación completa del estimador de RUL con comentarios detallados para facilitar su comprensión e integración.
+
+- El resultado se muestra en el monitor serial.
+
+---
+
+## 👨‍💻 Guía de Uso
+
+1. Conecta la Nicla Voice vía USB.
+2. Carga el firmware desde el Arduino IDE.
+3. Abre el monitor serial para observar las predicciones en tiempo real.
+4. Interpreta el valor de RUL para tomar decisiones de mantenimiento predictivo.
+
+> ⚠️ Un RUL bajo o negativo puede indicar un estado de desgaste crítico o una clase fuera del rango esperado.
+
+---
+
+## 🧠 Aplicaciones
+
+- Monitoreo inteligente de motores BLDC.
+- Detección temprana de fallas mediante análisis acústico.
+- Sistemas embebidos de bajo consumo con capacidades de aprendizaje automático.
+
+---
+
+## 📚 Recursos Útiles
+
+- [📖 Edge Impulse para Syntiant NDP120](https://docs.edgeimpulse.com/docs/run-inference/cpp-library/on-your-syntiant-tinyml-board)
+- [🔍 Tutorial: Reconocimiento de Movimiento con Syntiant](https://docs.edgeimpulse.com/docs/run-inference/hardware-specific-tutorials/motion-recognition-syntiant)
+
+
+---
+
+## 📊 Dataset de Vibración de Motor BLDC
+
+Este repositorio incluye un **dataset original de vibración** capturado desde un **motor BLDC** utilizando la tarjeta **Arduino Nicla Voice**. Los datos fueron adquiridos a través del puerto serial mediante una interfaz desarrollada en **MATLAB**.
+
+### 📌 Descripción
+
+- El dataset contiene señales de vibración registradas bajo **diferentes condiciones progresivas** del mismo motor a lo largo del tiempo.
+- Las condiciones reflejan el desgaste o cambios operativos simulados o reales del motor.
+- Los datos fueron obtenidos usando el **acelerómetro integrado** en la Nicla Voice.
+- El formato del dataset es apto para ser utilizado en tareas de entrenamiento, validación o análisis exploratorio.
+
+### 🧪 Aplicación y Valor Investigativo
+
+- Ideal para estudios en **mantenimiento predictivo**, **diagnóstico de fallas** y **aprendizaje automático** aplicado al análisis de vibraciones.
+- Puede utilizarse para construir modelos de predicción de estado o estimación de vida útil (RUL) en sistemas rotativos.
+- Proporciona una base de datos valiosa y realista para pruebas y validaciones académicas o de desarrollo.
+
+### 📂 Disponibilidad
+
+- El dataset está disponible en este repositorio bajo una licencia **abierta** para su uso libre con fines investigativos, educativos o de desarrollo.
+
+> 📢 Se agradece atribución al repositorio si decides usar este dataset en tus trabajos, publicaciones o desarrollos.
