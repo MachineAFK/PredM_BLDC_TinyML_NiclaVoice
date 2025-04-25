@@ -6,8 +6,9 @@ Esta guía describe cómo integrar un modelo de aprendizaje automático entrenad
 
 ## 📦 Contenido del Proyecto
 
-- Modelo TinyML exportado en formato `.synpkg`.
-- Firmware base modificado desde Edge Impulse para Nicla Voice.
+- Modelo TinyML exportado en formato `.synpkg` con su carpeta con varibales y metadatos correspondientes al modelo.
+- [Firmware original desde Edge Impulse para Nicla Voice](https://github.com/edgeimpulse/firmware-arduino-nicla-voice).
+- codigo `ei_syntiant_ndp120.cpp` del anterior firmware modificado para reemplazar asi como tambien la metadata y las variables del modelo.
 - Módulo personalizado para inferencia y cálculo de RUL (`RULModule.h`).
 - Instrucciones detalladas para integración y uso.
 
@@ -34,7 +35,7 @@ Esta guía describe cómo integrar un modelo de aprendizaje automático entrenad
 ## 🔌 Integración del Modelo en el Firmware
 
 1. Extrae el contenido de la librería Arduino exportada.
-2. Copia el archivo `model.syntiant` a la carpeta `model-parameters/` del firmware base.
+2. Copia el archivo `model.synpkg` a la carpeta `model-parameters/` del firmware base.
 3. Verifica que las clases del modelo coincidan con las utilizadas en `RULModule.h`.
 4. Abre el proyecto en el Arduino IDE, compílalo y cárgalo en la Nicla Voice.
 
