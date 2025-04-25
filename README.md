@@ -24,7 +24,7 @@ Esta guía describe cómo integrar un modelo de aprendizaje automático entrenad
 
 ## 📤 Exportación del Modelo desde Edge Impulse
 
-1. Entrena tu modelo en Edge Impulse con datos relevantes del motor (por ejemplo, audio).
+1. Entrena tu modelo en Edge Impulse con datos relevantes del motor (por ejemplo, vibracion o audio).
 2. Dirígete a la pestaña **Deployment** de tu proyecto.
 3. Selecciona **Syntiant NDP120 library (.synpkg)** y descarga el archivo.
 4. También puedes descargar la **Arduino library** generada para usar como base del firmware.
