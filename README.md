@@ -96,6 +96,7 @@ Este repositorio incluye un **dataset original de vibración** capturado desde u
 - Las condiciones reflejan el desgaste o cambios operativos simulados o reales del motor.
 - Los datos fueron obtenidos usando el **acelerómetro integrado** en la Nicla Voice.
 - El formato del dataset es apto para ser utilizado en tareas de entrenamiento, validación o análisis exploratorio.
+- 🔢 **Para este proyecto en particular, se utilizaron los primeros 50 registros de cada categoría**, aunque algunas clases cuentan con una cantidad significativamente mayor de muestras en el dataset completo.
 
 ### 🧪 Aplicación y Valor Investigativo
 
@@ -106,5 +107,8 @@ Este repositorio incluye un **dataset original de vibración** capturado desde u
 ### 📂 Disponibilidad
 
 - El dataset está disponible en este repositorio bajo una licencia **abierta** para su uso libre con fines investigativos, educativos o de desarrollo.
+
+*ℹ️ Si utilizas este dataset en tus trabajos, publicaciones o desarrollos, se agradece atribución al repositorio.*
+tivos o de desarrollo.
 
 *ℹ️ Si utilizas este dataset en tus trabajos, publicaciones o desarrollos, se agradece atribución al repositorio.*
