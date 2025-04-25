@@ -32,9 +32,8 @@ Esta guía describe cómo integrar un modelo de aprendizaje automático entrenad
 
 ## 🔌 Integración del Modelo en el Firmware
 
-1. Extrae la libreria firmware-arduino-nicla-voice y reemplaza en la ruta `firmware-arduino-nicla-voice/src/model-parameters`.
-2. Reemplaza la carpeta `model_metadata` de `predm_largeimu-syntiant-ndp120-lib-tdk-v13.zip` en el firmware original y haz el build correspondiente, en este caso con IMU.
-   También se incluye un binario generado en Edge Impulse que facilita la subida a la tarjeta aunque sin el módulo.
+1. Extrae la libreria firmware-arduino-nicla-voice y reemplaza en la ruta `firmware-arduino-nicla-voice/src/model-parameters` la carpeta `model_parameters` de `predm_largeimu-syntiant-ndp120-lib-tdk-v13.zip`, tambein reemplaza `ei_syntiant_ndp120.cpp` que esta en `firmware-arduino-nicla-voice/src/` y haz el build correspondiente, en este caso con IMU ().
+Se incluye un binario `predm_largeimu-nicla-voice.zip` generado en Edge Impulse que facilita la subida a la tarjeta aunque sin el módulo.
 3. Copia el archivo `ei_model.synpkg` que está en `predm_largeimu-syntiant-ndp120-lib-tdk-v13.zip` en este repositorio y reemplázalo en la carpeta `ndp120/` del firmware base y [flashealo](https://docs.arduino.cc/tutorials/nicla-voice/user-manual/) en el NDP con los algoritmos que proporcionan en el manual de Arduino.
 
 ---
@@ -91,7 +90,7 @@ Para cargar (flashear) el firmware en la placa:
 
 ---
 
-## 🚀 Despliegue de tu Impulse
+## 🚀 FLASH
 
 Una vez compilado el firmware de Arduino, deberás reemplazar los archivos correspondientes en el firmware base con los generados por tu proyecto.
 
