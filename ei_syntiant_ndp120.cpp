@@ -263,7 +263,7 @@ static void error_event(void)
              ei_printf("Match: %s\n", label);
              
              // Llamar a classifyAndReport del módulo RUL
-             classifyAndReport(String(label));  // Asegúrate de pasar la etiqueta como un String
+             classifyAndReport(String(label)); 
          }
      }
  }
