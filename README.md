@@ -173,6 +173,36 @@ Este repositorio incluye un **dataset original de vibración** capturado desde u
 - Puede utilizarse para construir modelos de predicción de estado o estimación de vida útil (RUL) en sistemas rotativos.
 - Proporciona una base de datos valiosa y realista para pruebas y validaciones académicas o de desarrollo.
 
-### 📂 Disponibilidad
+### 📂 Disponibilidad   https://studio.edgeimpulse.com/public/679162/latest
 
-- El dataset está disponible en este repositorio bajo una licencia **abierta** para su uso libre con fines investigativos, educativos o de desarrollo.
+- 📄 Licencia BSD de 3 Cláusulas (BSD 3-Clause License)
+Este proyecto utiliza la Licencia BSD de 3 Cláusulas, una licencia de código abierto permisiva que permite el uso amplio del software, bajo ciertas condiciones.
+
+🔑 Resumen
+Esta licencia permite que el software se use, copie, modifique y distribuya, incluso en proyectos comerciales, siempre que se cumplan tres condiciones:
+
+✅ Permisos que otorga:
+Uso libre para cualquier propósito, personal o comercial.
+
+Modificación del código fuente.
+
+Distribución del software original o modificado.
+
+Licencia permisiva: no obliga a liberar el código modificado.
+
+⚠️ Condiciones (las 3 cláusulas):
+Aviso de copyright:
+Se debe mantener el aviso de copyright original en todas las copias del software.
+
+Aviso de licencia:
+Se debe incluir el texto completo de esta licencia en cualquier redistribución.
+
+Sin uso de nombres:
+No se puede utilizar el nombre del autor, ni de la organización original, para promocionar productos derivados sin permiso expreso.
+
+🚫 Qué no permite:
+Sin garantías: El software se proporciona “tal cual”, sin garantías de funcionamiento, seguridad o idoneidad.
+
+Restricción de uso de nombre: No se puede usar el nombre del autor para publicidad sin autorización explícita.
+
+
